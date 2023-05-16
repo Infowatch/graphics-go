@@ -5,8 +5,8 @@
 package graphics
 
 import (
-	"github.com/BurntSushi/graphics-go/graphics/convolve"
 	"errors"
+	"github.com/BurntSushi/graphics-go/graphics/convolve"
 	"image"
 	"image/draw"
 	"math"
@@ -31,7 +31,9 @@ func Blur(dst draw.Image, src image.Image, opt *BlurOptions) error {
 	if src == nil {
 		return errors.New("graphics: src is nil")
 	}
-
+	if opt != nil && opt.StdDev == 0 {
+		return errors.New("graphics: stdDev == 0")
+	}
 	sd := DefaultStdDev
 	size := 0
 
